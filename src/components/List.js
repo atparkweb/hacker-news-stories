@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { ReactComponent as Check } from '../check.svg';
 import { StyledButtonSmall } from './StyledButton';
 
 const StyledItem = styled.div`
@@ -34,19 +35,22 @@ const Item = ({ item, onRemoveItem }) => {
         <StyledButtonSmall
           type="button"
           onClick={() => onRemoveItem(item)}>
-          Dismiss
+          <Check height="18px" width="18px" />
         </StyledButtonSmall>
       </StyledColumn>
     </StyledItem>
   );
 }
 
-const List = ({ list, onRemoveItem }) =>
-  list.map(item => (
-    <Item key={item.objectID}
-      item={item}
-      onRemoveItem={onRemoveItem}
-    />
+const List = React.memo(
+  ({ list, onRemoveItem }) =>
+    console.log('B:List') || // console.log returns false
+    list.map(item => (
+      <Item key={item.objectID}
+        item={item}
+        onRemoveItem={onRemoveItem}
+      />
+    )
   ));
 
 export default List;

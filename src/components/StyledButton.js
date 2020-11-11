@@ -11,6 +11,11 @@ const StyledButton = styled.button`
   &:hover {
     background: #171212;
     color: white;
+    
+    svg > g {
+      fill: #fff;
+      stroke: #fff;
+    }
   }
 `;
 
