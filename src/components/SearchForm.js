@@ -6,15 +6,17 @@ const SearchForm = ({
     onSearchInput,
     onSearchSubmit
 }) => (
-  <form onSubmit={handleSearchSubmit}>
+  <form onSubmit={onSearchSubmit}>
     <InputWithLabel id="search"
       type="text"
       value={searchTerm}
       isFocused
-      onInputChange={handleSearchInput}>
+      onInputChange={onSearchInput}>
         <strong>Search: </strong>
     </InputWithLabel>
   
     <button type="submit" disabled={!searchTerm}>Submit</button>
   </form>
-)
+);
+
+export default SearchForm;
