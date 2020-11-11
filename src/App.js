@@ -1,6 +1,6 @@
-import './App.css';
 import React from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 
 import List from './components/List';
 import SearchForm from './components/SearchForm';
@@ -8,6 +8,21 @@ import SearchForm from './components/SearchForm';
 import useSemiPersistentState from './hooks/semiPersistentState';
 import storiesReducer from './reducers/storiesReducer';
 
+const StyledContainer = styled.div`
+  height: 100vw;
+  padding: 20px;
+  
+  background: #84a4d4; /* fallback for old browsers */
+  background: linear-gradient(to left, #b6fbff, #83a4d4);
+  
+  color: #171212;
+`;
+
+const StyledHeadlinePrimary = styled.h1`
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 2px;
+`
 const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?query='
 
 const App = () => {
@@ -74,12 +89,10 @@ const App = () => {
   }
   
   return (
-    <div style={{padding: '2rem'}}>
-      <h1>Hello React!</h1>
+    <StyledContainer>
+      <StyledHeadlinePrimary>My Hacker Stories</StyledHeadlinePrimary>
 
       <SearchForm searchTerm={searchTerm} onSearchInput={handleSearchInput} onSearchSubmit={handleSearchSubmit} />
-
-      <hr />
 
       { stories.isError && <p>Something is wrong...</p>}
 
@@ -89,7 +102,7 @@ const App = () => {
         <List list={stories.data} onRemoveItem={handleRemoveStory}/>
       )}
 
-    </div>
+    </StyledContainer>
   );
 }
 

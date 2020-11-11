@@ -1,18 +1,43 @@
 import React from 'react';
+import styled from 'styled-components';
+import { StyledButtonSmall } from './StyledButton';
+
+const StyledItem = styled.div`
+  display: flex;
+  align-items: center;
+  padding-bottom: 5px;
+`;
+
+const StyledColumn = styled.span`
+  padding: 0 5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  
+  a {
+    color: inherit;
+  }
+  
+  width: ${props => props.width};
+`;
 
 const Item = ({ item, onRemoveItem }) => {
   return (
-    <div>
-      <span>
+    <StyledItem>
+      <StyledColumn width="40%">
         <a href={item.url}>{item.title}</a>
-      </span>
-      <span>{item.author}</span>
-      <span>{item.num_comments}</span>
-      <span>{item.points}</span>
-      <button type="button" onClick={() => onRemoveItem(item)}>
-        Dismiss
-      </button>
-    </div>
+      </StyledColumn>
+      <StyledColumn width="30%">{item.author}</StyledColumn>
+      <StyledColumn width="10%">{item.num_comments}</StyledColumn>
+      <StyledColumn width="10%">{item.points}</StyledColumn>
+      <StyledColumn width="10%">
+        <StyledButtonSmall
+          type="button"
+          onClick={() => onRemoveItem(item)}>
+          Dismiss
+        </StyledButtonSmall>
+      </StyledColumn>
+    </StyledItem>
   );
 }
 
