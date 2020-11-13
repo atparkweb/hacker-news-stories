@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Story, Stories } from '../types';
 import { ReactComponent as Check } from '../check.svg';
 import { StyledButtonSmall } from './StyledButton';
 
@@ -22,7 +23,12 @@ const StyledColumn = styled.span`
   width: ${props => props.width};
 `;
 
-const Item = ({ item, onRemoveItem }) => {
+type ItemProps = {
+  item: Story;
+  onRemoveItem: (item: Story) => void
+};
+
+const Item = ({ item, onRemoveItem }: ItemProps) => {
   return (
     <StyledItem>
       <StyledColumn width="40%">
@@ -42,15 +48,21 @@ const Item = ({ item, onRemoveItem }) => {
   );
 }
 
-const List = React.memo(
-  ({ list, onRemoveItem }) =>
-    console.log('B:List') || // console.log returns false
-    list.map(item => (
-      <Item key={item.objectID}
+type ListProps = {
+  list: Stories;
+  onRemoveItem: (item: Story) => void;
+}
+
+const List = ({ list, onRemoveItem }: ListProps) => (
+  <>
+    {list.map(item => (
+      <Item
+        key={item.objectID}
         item={item}
         onRemoveItem={onRemoveItem}
       />
-    )
-  ));
+    ))}
+  </>
+);
 
 export default List;

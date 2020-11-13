@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import styled from 'styled-components';
 
+import { Story, StoriesState } from './types';
 import List from './components/List';
 import SearchForm from './components/SearchForm';
 
@@ -25,9 +26,9 @@ const StyledHeadlinePrimary = styled.h1`
 `
 const API_ENDPOINT = 'https://hn.algolia.com/api/v1/search?query='
 
-const getSumComments = stories => {
+const getSumComments = (stories: StoriesState) => {
   return stories.data.reduce(
-    (result, value) => result + value.num_comments,
+    (result: number, value: any) => result + value.num_comments,
     0
   );
 };
@@ -41,11 +42,11 @@ const App = () => {
   );
   
   /* Event handlers */
-  const handleSearchInput = event => {
+  const handleSearchInput = (event:ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
   
-  const handleSearchSubmit = event => {
+  const handleSearchSubmit = (event:FormEvent<HTMLFormElement>) => {
     setUrl(`${API_ENDPOINT}${searchTerm}`);
     
     event.preventDefault();
@@ -90,7 +91,7 @@ const App = () => {
     handleFetchStories();
   }, [handleFetchStories]);
   
-  const handleRemoveStory = React.useCallback(item => {
+  const handleRemoveStory = React.useCallback((item: Story) => {
     dispatchStories({
       type: 'REMOVE_STORY',
       payload: item
