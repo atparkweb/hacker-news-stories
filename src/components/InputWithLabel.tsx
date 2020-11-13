@@ -1,4 +1,5 @@
-import React, { ChangeEvent, ReactChildren } from 'react';
+import React from 'react';
+import { InputWithLabelProps } from '../types';
 import styled from 'styled-components';
 
 const StyledLabel = styled.label`
@@ -16,35 +17,26 @@ const StyledInput = styled.input`
   font-size: 24px;
 `;
 
-type InputWithLabelProps = {
-  id: string;
-  value: string;
-  type: string;
-  isFocused: boolean;
-  children: Array<ReactChildren>,
-  onInputChange: ChangeEvent<HTMLElement>
-}
-
-const InputWithLabel = (props: InputWithLabelProps) => {
-  const inputRef = React.useRef();
+const InputWithLabel = ({id, value, type="text", onInputChange, isFocused, children}: InputWithLabelProps) => {
+  const inputRef = React.useRef<HTMLInputElement>(null!);
 
   React.useEffect(() => {
     const current = inputRef.current;
-    if (props.isFocused && current) {
+    if (isFocused && current) {
       current.focus();
     }
-  }, [props.isFocused]);
+  }, [isFocused]);
 
   return (
     <>
-        <StyledLabel htmlFor={props.id} className="label">{props.children}</StyledLabel>
+        <StyledLabel htmlFor={id} className="label">{children}</StyledLabel>
         <StyledInput
           ref={inputRef}
-          id={props.id}
-          type={props.type || "text"}
-          value={props.value}
+          id={id}
+          type={type || "text"}
+          value={value}
           className="input"
-          onChange={props.onInputChange} />
+          onChange={onInputChange} />
     </>
   );
 }

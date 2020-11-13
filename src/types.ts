@@ -1,3 +1,5 @@
+import { ChangeEvent, ReactChildren } from 'react';
+
 type Story = {
   objectID: string;
   url: string;
@@ -39,7 +41,25 @@ type StoriesAction =
   | StoriesFetchFailureAction
   | StoriesRemoveAction
   
+  
+type InputWithLabelProps = {
+  id: string;
+  value: string;
+  type?: string;
+  isFocused?: boolean;
+  children:  React.ReactNode;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
+}
+
+type SearchFormProps = {
+  searchTerm: string;
+  onSearchInput: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onSearchSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
+}
+  
 export type {
+    InputWithLabelProps,
+    SearchFormProps,
     Story,
     Stories,
     StoriesState,

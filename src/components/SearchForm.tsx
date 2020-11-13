@@ -1,6 +1,7 @@
 import React from 'react';
 import InputWithLabel from './InputWithLabel';
 import styled from 'styled-components';
+import { SearchFormProps } from '../types';
 import { StyledButtonLarge } from './StyledButton';
 
 const StyledSearchForm = styled.form`
@@ -13,7 +14,7 @@ const SearchForm = ({
     searchTerm,
     onSearchInput,
     onSearchSubmit
-}) => (
+}: SearchFormProps) => (
   <StyledSearchForm onSubmit={onSearchSubmit}>
     <InputWithLabel id="search"
       type="text"

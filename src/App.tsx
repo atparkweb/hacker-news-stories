@@ -42,11 +42,11 @@ const App = () => {
   );
   
   /* Event handlers */
-  const handleSearchInput = (event:ChangeEvent<HTMLInputElement>) => {
+  const handleSearchInput = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
   
-  const handleSearchSubmit = (event:FormEvent<HTMLFormElement>) => {
+  const handleSearchSubmit = (event: FormEvent<HTMLFormElement>) => {
     setUrl(`${API_ENDPOINT}${searchTerm}`);
     
     event.preventDefault();
