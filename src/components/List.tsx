@@ -66,3 +66,4 @@ const List = ({ list, onRemoveItem }: ListProps) => (
 );
 
 export default List;
+export { Item };

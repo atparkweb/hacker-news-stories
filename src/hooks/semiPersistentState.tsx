@@ -16,4 +16,4 @@ const useSemiPersistentState = (
   return [value, setValue];
 }
 
-export default useSemiPersistentState;
+export { useSemiPersistentState };

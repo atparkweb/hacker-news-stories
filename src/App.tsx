@@ -6,8 +6,8 @@ import { Story, StoriesState } from './types';
 import List from './components/List';
 import SearchForm from './components/SearchForm';
 
-import useSemiPersistentState from './hooks/semiPersistentState';
-import storiesReducer from './reducers/storiesReducer';
+import { useSemiPersistentState } from './hooks/semiPersistentState';
+import { storiesReducer } from './reducers/storiesReducer';
 
 const StyledContainer = styled.div`
   height: 100vw;

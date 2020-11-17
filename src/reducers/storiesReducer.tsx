@@ -33,4 +33,4 @@ const storiesReducer = (state: StoriesState, action: StoriesAction) => {
   }
 };
 
-export default storiesReducer;
+export { storiesReducer };
