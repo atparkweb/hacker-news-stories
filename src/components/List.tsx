@@ -10,7 +10,7 @@ const StyledItem = styled.div`
   padding-bottom: 5px;
 `;
 
-const StyledColumn = styled.span`
+const StyledColumn = styled.span<{ width: string }>`
   padding: 0 5px;
   white-space: nowrap;
   overflow: hidden;
@@ -66,4 +66,4 @@ const List = ({ list, onRemoveItem }: ListProps) => (
 );
 
 export default List;
-export { Item };
+export { Item, List };

@@ -1,4 +1,4 @@
-import { ChangeEvent, ReactChildren } from 'react';
+import { ChangeEvent } from 'react';
 
 type Story = {
   objectID: string;

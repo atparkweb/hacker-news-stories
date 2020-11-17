@@ -2,10 +2,9 @@ import React from 'react';
 import {
   render,
   screen,
-  fireEvent,
-  act
+  fireEvent
 } from '@testing-library/react';
-import { Item } from './List';
+import { Item, List } from './List';
 
 const storyOne = {
   title: 'React',
@@ -16,10 +15,14 @@ const storyOne = {
   objectID: 0
 };
 
-describe('Item', ()=> {
+const handleRemoveItem = jest.fn();
+
+describe('Item component', ()=> {
+  beforeEach(() => {
+    render(<Item item={storyOne} onRemoveItem={handleRemoveItem} />);
+  });
+
   test('renders all properties', () => {
-    render(<Item item={storyOne} />);
-    
     expect(screen.getByText('Jordan Walke')).toBeInTheDocument();
     expect(screen.getByText('React')).toHaveAttribute(
       'href',
@@ -28,16 +31,21 @@ describe('Item', ()=> {
   });
   
   test('renders a clickable dismiss button', () => {
-    render(<Item item={storyOne} />);
-    
     expect(screen.getByRole('button')).toBeInTheDocument();
   });
   
   test('clicking the dismiss button calls the callback handler', ()=> {
-    const handleRemoveItem = jest.fn();
-    
-    render(<Item item={storyOne} onRemoveItem={handleRemoveItem} />);
     fireEvent.click(screen.getByRole('button'));
     expect(handleRemoveItem).toHaveBeenCalledTimes(1);
   });
-})
+});
+
+describe('List component', () => {
+  beforeEach(() => {
+    render(<List list={[storyOne]} onRemoveItem={handleRemoveItem} />);
+  });
+  
+  test('renders all items', () => {
+    expect(screen.getByText('Jordan Walke')).toBeInTheDocument();
+  });
+});
