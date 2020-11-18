@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React from 'react';
 import {
   render,
@@ -27,6 +28,8 @@ const storyTwo = {
 };
 
 const stories = [storyOne, storyTwo];
+
+jest.mock('axios');
 
 describe('storiesReducer', ()=> {
   test('removes story from all stories', ()=> {
@@ -83,5 +86,25 @@ describe('storiesReducer', ()=> {
     };
     
     expect(newState).toStrictEqual(expectedState);
+  });
+});
+
+describe('App', () => {
+  test('succeeds fetching data', async () => {
+    const promise = Promise.resolve({
+      data: {
+	hits: stories
+      }
+    });
+  
+    axios.get.mockImplementationOnce(() => promise);
+
+    render(<App />);
+
+    expect(screen.queryByText(/Loading/)).toBeInTheDocument();
+    
+    await act(() => promise);
+    
+    expect(screen.queryByText(/Loading/)).toBeNull();
   });
 });
