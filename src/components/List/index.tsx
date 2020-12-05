@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Story, Stories } from '../types';
-import { ReactComponent as Check } from '../check.svg';
-import { StyledButtonSmall } from './StyledButton';
+import { Story, Stories } from '../../types';
+import { ReactComponent as Check } from '../../check.svg';
+import { StyledButtonSmall } from '../StyledButton';
 
 const StyledItem = styled.div`
   display: flex;

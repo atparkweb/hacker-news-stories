@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputWithLabelProps } from '../types';
+import { InputWithLabelProps } from '../../types';
 import styled from 'styled-components';
 
 const StyledLabel = styled.label`

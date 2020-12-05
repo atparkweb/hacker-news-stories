@@ -108,7 +108,6 @@ describe('App', () => {
     
     expect(screen.getByText('React')).toBeInTheDocument();
     expect(screen.getByText('Redux')).toBeInTheDocument();
-    expect(screen.getAllByText('Dismiss').length).toBe(2);
   });
   
   test('fails fetching data', async () => {
@@ -120,12 +119,12 @@ describe('App', () => {
     
     expect(screen.getByText(/Loading/)).toBeInTheDocument();
     
-    try {
-      await act(() => promise);
-    } catch (error) {
+    let p = await act(() => promise);
+    
+    p.finally(() => {
       expect(screen.queryByText(/Loading/)).toBeNull();
       expect(screen.queryByText(/went wrong/)).toBeInTheDocument();
-    }
+    })
   });
   
   test('removes a story', async () => {
