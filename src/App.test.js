@@ -3,7 +3,6 @@ import React from 'react';
 import {
   render,
   screen,
-  fireEvent,
   act,
 } from '@testing-library/react';
 import { storiesReducer } from './reducers/storiesReducer';
@@ -106,5 +105,42 @@ describe('App', () => {
     await act(() => promise);
     
     expect(screen.queryByText(/Loading/)).toBeNull();
+    
+    expect(screen.getByText('React')).toBeInTheDocument();
+    expect(screen.getByText('Redux')).toBeInTheDocument();
+    expect(screen.getAllByText('Dismiss').length).toBe(2);
+  });
+  
+  test('fails fetching data', async () => {
+    const promise = Promise.reject();
+    
+    axios.get.mockImplementationOnce(() => promise);
+    
+    render(<App />);
+    
+    expect(screen.getByText(/Loading/)).toBeInTheDocument();
+    
+    try {
+      await act(() => promise);
+    } catch (error) {
+      expect(screen.queryByText(/Loading/)).toBeNull();
+      expect(screen.queryByText(/went wrong/)).toBeInTheDocument();
+    }
+  });
+  
+  test('removes a story', async () => {
+    const promise = Promise.resolve({
+      data: {
+	hits: stories,
+      }
+    });
+    
+    axios.get.mockImplementationOnce(() => promise);
+    
+    render(<App/>);
+    
+    await act(() => promise);
+    
+    expect(screen.getByText('Jordan Walke')).toBeInTheDocument();
   });
 });
